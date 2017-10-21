@@ -1,14 +1,24 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HttpModule} from '@angular/http';
+import {HeaderComponent} from './header/header.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialDesignModule} from '../material-design/material-design.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+
+    BrowserAnimationsModule,
+    MaterialDesignModule
   ],
-  declarations: [],
+  declarations: [
+    HeaderComponent
+  ],
   exports: [
-    HttpModule
+    HttpModule,
+    MaterialDesignModule,
+    HeaderComponent
   ]
 })
 export class CoreModule {
