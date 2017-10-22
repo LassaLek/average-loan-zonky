@@ -22,4 +22,9 @@ describe('HeaderComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it(`should have as title 'Zonky'`, async(() => {
+    expect(component.title).toEqual('Zonky');
+  }));
+
 });
