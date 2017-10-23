@@ -1,44 +1,11 @@
 <mat-tab-group (selectChange)="setRating($event)">
-  <mat-tab label="A**">
-    <h1>Some tab content</h1>
-    <p *ngFor="let loan of filteredLoans">
+  <mat-tab *ngFor="let rating of ratingsArr" label="{{rating}}">
+    <h1>LOANS:</h1>
+    <ul #list>
+      <li *ngFor="let loan of loans | filter:rating">
       {{loan.amount}}
-    </p>
-  </mat-tab>
-  <mat-tab label="A*">
-    <h1>Some tab content</h1>
-    <p *ngFor="let loan of filteredLoans">
-      {{loan.filteredLoans}}
-    </p>
-  </mat-tab>
-  <mat-tab label="A++">
-    <h1>Some tab content</h1>
-    <p *ngFor="let loan of filteredLoans">
-      {{loan.amount}}
-    </p>
-  </mat-tab>
-  <mat-tab label="A+">
-    <h1>Some tab content</h1>
-    <p *ngFor="let loan of filteredLoans">
-      {{loan.amount}}
-    </p>
-  </mat-tab>
-  <mat-tab label="B">
-    <h1>Some tab content</h1>
-    <p *ngFor="let loan of filteredLoans">
-      {{loan.amount}}
-    </p>
-  </mat-tab>
-  <mat-tab label="C">
-    <h1>Some tab content</h1>
-    <p *ngFor="let loan of filteredLoans">
-      {{loan.amount}}
-    </p>
-  </mat-tab>
-  <mat-tab label="D">
-    <h1>Some tab content</h1>
-    <p *ngFor="let loan of filteredLoans">
-      {{loan.amount}}
-    </p>
+      </li>
+    </ul>
+    <p *ngIf="!list.children.length">No results</p>
   </mat-tab>
 </mat-tab-group>

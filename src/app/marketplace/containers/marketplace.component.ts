@@ -1,52 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MarketplaceService} from '../providers/marketplace.service';
 import {LoanModel} from '../model/loan.model';
+import {RatingsEnum} from '../model/ratings.enum';
+import {ErrorService} from '../../core/services/error.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-marketplace',
   templateUrl: './marketplace.component.html',
   styleUrls: ['./marketplace.component.css']
 })
-export class MarketplaceComponent implements OnInit {
-  private loans: Array<LoanModel> = [];
-  public filteredLoans: Array<LoanModel> = [];
+export class MarketplaceComponent implements OnInit, OnDestroy {
+  public loans: Array<LoanModel>;
+  public rating: string;
+  public ratingsArr: Array<string>;
+  private loansSub: Subscription;
 
-  constructor(private marketplaceService: MarketplaceService) { }
+  constructor(private marketplaceService: MarketplaceService,
+              private errorService: ErrorService) {
+    this.loans = [];
+    this.rating = 'AAAAA';
+    this.ratingsArr = Object
+      .keys(RatingsEnum)
+      .map((rating) => {
+        return rating;
+      });
+  }
 
   ngOnInit() {
-    this.marketplaceService.getLoans()
+    this.loansSub = this.marketplaceService.getLoans()
       .subscribe(
-      this.success,
-      this.fail
-    );
+        this.success,
+        this.fail
+      );
+  }
+
+  ngOnDestroy() {
+    this.loansSub.unsubscribe();
   }
 
   setRating(rating) {
-    console.log('SET RATING', rating);
-    let pairs = {
-      0: 'AAA',
-      1: 'AA',
-      2: 'A++',
-      3: 'A+',
-      4: 'A',
-      5: 'B',
-      6: 'C',
-      7: 'D',
-    };
-    this.filteredLoans = this.loans.filter((loan) => {
-      return loan.rating === pairs[rating.index];
-    })
+    this.rating = this.ratingsArr[rating.index];
   }
 
   success = (data) => {
     console.log(data);
     this.loans = data;
-    this.filteredLoans = this.loans.filter((loan) => {
-      return loan.rating === 'AAA';
-    });
   };
 
   fail = (err) => {
-    console.log(err);
+    this.errorService.present(err, 'subscribe to loans service');
   }
 }

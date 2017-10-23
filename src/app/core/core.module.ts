@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {HttpModule} from '@angular/http';
 import {HeaderComponent} from './header/header.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatToolbarModule} from '@angular/material';
+import {MatTabBody, MatTabHeader, MatToolbarModule} from '@angular/material';
 import {ErrorService} from './services/error.service';
 
 @NgModule({
@@ -11,10 +11,11 @@ import {ErrorService} from './services/error.service';
     CommonModule,
 
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+
   ],
   declarations: [
-    HeaderComponent
+    HeaderComponent,
   ],
   providers: [
     ErrorService
