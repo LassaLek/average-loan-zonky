@@ -5,10 +5,12 @@ import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {MarketplaceModule} from './marketplace/marketplace.module';
 import {AppRoutingModule} from './app-routing.module';
+import { FilterPipe } from './shared/pipes/filter/filter.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

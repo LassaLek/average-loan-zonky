@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run preinit && ng serve",
+    "start": "npm run preinit & ng serve --proxy-config proxy.conf.ts",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

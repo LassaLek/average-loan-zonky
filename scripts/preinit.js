@@ -1,7 +1,7 @@
 "use strict";
 
 
-const SOURCE_ROOT = 'https://api.zonky.cz/loans/marketplace';
+const SOURCE_ROOT = 'https://api.zonky.cz/';
 
 const request = require('request-promise');
 const fs = require('fs');
@@ -21,7 +21,7 @@ function run() {
 
 function downloadLoans() {
   return request.get({
-    url: SOURCE_ROOT,
+    url: SOURCE_ROOT + 'loans/marketplace',
     json: true
   });
 }

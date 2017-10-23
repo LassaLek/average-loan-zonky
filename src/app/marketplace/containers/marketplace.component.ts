@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MarketplaceService} from '../providers/marketplace.service';
+import {LoanModel} from '../model/loan.model';
 
 @Component({
   selector: 'app-marketplace',
@@ -7,8 +8,8 @@ import {MarketplaceService} from '../providers/marketplace.service';
   styleUrls: ['./marketplace.component.css']
 })
 export class MarketplaceComponent implements OnInit {
-  private loans;
-  public filteredLoans;
+  private loans: Array<LoanModel> = [];
+  public filteredLoans: Array<LoanModel> = [];
 
   constructor(private marketplaceService: MarketplaceService) { }
 

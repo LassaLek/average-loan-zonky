@@ -4,6 +4,7 @@ import {HttpModule} from '@angular/http';
 import {HeaderComponent} from './header/header.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material';
+import {ErrorService} from './services/error.service';
 
 @NgModule({
   imports: [
@@ -14,6 +15,9 @@ import {MatToolbarModule} from '@angular/material';
   ],
   declarations: [
     HeaderComponent
+  ],
+  providers: [
+    ErrorService
   ],
   exports: [
     HttpModule,
