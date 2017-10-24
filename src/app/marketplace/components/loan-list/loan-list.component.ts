@@ -7,11 +7,12 @@ import {LoanModel} from '../../model/loan.model';
   styleUrls: ['./loan-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoanListComponent{
+export class LoanListComponent {
   @Input() loans: Array<LoanModel> = [];
   @Input() colNum: number = 1;
 
-  constructor() { }
+  constructor() {
+  }
 
   trackLoansById(index, item) {
     return item.id;

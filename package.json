@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run preinit & ng serve --proxy-config proxy.conf.ts",
-    "all-tests": "ng lint && ng test",
+    "all-tests": "ng lint && ng e2e && ng test",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
