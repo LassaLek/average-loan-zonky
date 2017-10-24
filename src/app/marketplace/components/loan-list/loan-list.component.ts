@@ -1,17 +1,17 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {LoanModel} from '../../model/loan.model';
 
 @Component({
   selector: 'app-loan-list',
   templateUrl: './loan-list.component.html',
-  styleUrls: ['./loan-list.component.css']
+  styleUrls: ['./loan-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoanListComponent {
+export class LoanListComponent{
   @Input() loans: Array<LoanModel> = [];
   @Input() colNum: number = 1;
 
-  constructor() {
-  }
+  constructor() { }
 
   trackLoansById(index, item) {
     return item.id;
