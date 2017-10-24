@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
+import {MatToolbarModule} from '@angular/material';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,6 +9,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [MatToolbarModule],
       declarations: [ HeaderComponent ]
     })
     .compileComponents();
@@ -23,7 +25,7 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'Zonky'`, async(() => {
+  it(`should have initial title as 'Zonky'`, async(() => {
     expect(component.title).toEqual('Zonky');
   }));
 
