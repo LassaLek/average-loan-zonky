@@ -1,10 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {MarketplaceService} from '../providers/marketplace.service';
 import {LoanModel} from '../model/loan.model';
 import {RatingsEnum} from '../model/ratings.enum';
 import {ErrorService} from '../../core/services/error.service';
 import {Subscription} from 'rxjs/Subscription';
 import {FilterPipe} from '../../shared/pipes/filter/filter.pipe';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'app-marketplace',
@@ -17,10 +19,13 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
   public ratingsArr: Array<string> = this.enumToArray(RatingsEnum);
   public averageOfFilteredLoans: number = 0;
   private loansSub: Subscription = null;
+  private responsiveSub: Subscription = null;
+  public colNum: number = 1;
 
   constructor(private marketplaceService: MarketplaceService,
               private errorService: ErrorService,
               private filterPipe: FilterPipe) {
+
   }
 
   ngOnInit() {
@@ -31,10 +36,15 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
         this.fail,
         this.complete
       );
+    this.responsiveSub = this.setColNum$()
+      .subscribe((colNum) => {
+        this.colNum = colNum;
+      });
   }
 
   ngOnDestroy() {
     this.loansSub.unsubscribe();
+    this.responsiveSub.unsubscribe();
   }
 
   setRating(rating) {
@@ -60,6 +70,18 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
   private complete = () => {
 
   };
+
+  private setColNum$() {
+    return Observable
+      .fromEvent(window, 'resize')
+      .debounceTime(100)
+      .map(() => {
+        if (window && window.innerWidth) {
+          return Math.floor(window.innerWidth / 250) || 1;
+        }
+        return 1;
+      });
+  }
 
   private enumToArray(enumObj: any) {
     if (!enumObj) {

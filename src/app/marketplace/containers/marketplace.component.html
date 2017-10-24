@@ -2,14 +2,18 @@
   <mat-tab *ngFor="let rating of ratingsArr" label="{{rating}}">
     <h2 class="center-text">Průměrná půjčka: {{averageOfFilteredLoans}} Kč</h2>
     <div *ngIf="filteredLoans.length === 0" class="center-text">Žádné půjčky</div>
-    <mat-grid-list cols="5" rowHeight="200px" #list>
+    <mat-grid-list
+      [cols]="colNum"
+      rowHeight="200px"
+      #list
+      gutterSize="20px">
       <mat-grid-tile
         *ngFor="let loan of filteredLoans"
         [colspan]="1"
-        [rowspan]="2">
+        [rowspan]="1">
         <mat-card
-          [style.height]="'200px'"
-          [style.width]="'200px'">
+          [style.height]="'150px'"
+          [style.width]="'150px'">
           <mat-card-title>{{loan.amount}} Kč</mat-card-title>
           <mat-card-subtitle>{{loan.rating}}</mat-card-subtitle>
           <mat-card-content>{{loan.name}}</mat-card-content>
