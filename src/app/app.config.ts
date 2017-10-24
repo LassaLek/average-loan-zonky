@@ -1,6 +1,6 @@
 export class Config {
 
   public static get API_ENDPOINT(): string {
-    return 'http://localhost:4200/';
+    return 'http://localhost:4200';
   }
 }

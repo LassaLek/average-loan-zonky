@@ -33,7 +33,9 @@ describe('MarketplaceService', () => {
 
   it('average of sum 1000 with count 10 is 100', () => {
     expect(MarketplaceService.countAverage(1000, 10)).toBe(100);
-
   });
 
+  it('average return max of two decimals 1/3 is rounded to 0.34', () => {
+    expect(MarketplaceService.countAverage(1, 3)).toBe(0.34);
+  });
 });

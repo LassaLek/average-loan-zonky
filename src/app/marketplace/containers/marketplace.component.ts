@@ -51,7 +51,6 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
   private success = (data) => {
     this.loans = data;
     this.setRating({index: 0});
-    this.averageOfFilteredLoans = MarketplaceService.countAverage(0,0);
   };
 
   private fail = (err) => {
@@ -62,7 +61,7 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
 
   };
 
-  private enumToArray(enumObj: RatingsEnum) {
+  private enumToArray(enumObj: any) {
     if (!enumObj) {
       return [];
     }

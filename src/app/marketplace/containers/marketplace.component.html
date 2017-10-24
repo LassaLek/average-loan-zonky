@@ -1,12 +1,25 @@
 <mat-tab-group (selectChange)="setRating($event)">
   <mat-tab *ngFor="let rating of ratingsArr" label="{{rating}}">
-    <h1>LOANS:</h1>
-    <h2>{{averageOfFilteredLoans}}</h2>
-    <ul #list>
-      <li *ngFor="let loan of filteredLoans">
-      {{loan.amount}}
-      </li>
-    </ul>
-    <p *ngIf="!list.children.length">No results</p>
+    <h2 class="center-text">Průměrná půjčka: {{averageOfFilteredLoans}} Kč</h2>
+    <div *ngIf="filteredLoans.length === 0" class="center-text">Žádné půjčky</div>
+    <mat-grid-list cols="5" rowHeight="200px" #list>
+      <mat-grid-tile
+        *ngFor="let loan of filteredLoans"
+        [colspan]="1"
+        [rowspan]="2">
+        <mat-card
+          [style.height]="'200px'"
+          [style.width]="'200px'">
+          <mat-card-title>{{loan.amount}} Kč</mat-card-title>
+          <mat-card-subtitle>{{loan.rating}}</mat-card-subtitle>
+          <mat-card-content>{{loan.name}}</mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
   </mat-tab>
 </mat-tab-group>
+
+
+
+
+

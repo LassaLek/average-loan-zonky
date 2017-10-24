@@ -43,10 +43,14 @@ export class MarketplaceService {
 
   static countAverage(sum: number, count: number): number {
     if (typeof sum === 'number' && typeof count === 'number' && sum >= 0 && count > 0) {
-      return sum / count;
+      return this.roundToTwoDecimal(sum / count);
     }
 
     return 0;
+  }
+
+  static roundToTwoDecimal(unRounded: number): number {
+    return +(Math.round(unRounded * 100) / 100).toFixed(2);
   }
 
   private getPreloadedLoans(): Observable<Array<LoanModel>> {
