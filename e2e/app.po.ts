@@ -5,7 +5,19 @@ export class ZonkyPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getTabs() {
+    return element
+      .all(by.className('mat-tab-label'))
+      .map(function(element) {
+        return element.getText();
+      });
+  }
+
+  getLoans() {
+    return element
+      .all(by.className('mat-grid-tile'))
+      .map(function(element) {
+        return element.getText();
+      });
   }
 }
