@@ -8,8 +8,13 @@
   rowHeight="200px"
   #list
   gutterSize="20px">
-  <app-loan-tile
-    *ngFor="let loan of loans; trackBy: trackLoansById"
-    [loan]="loan">
-  </app-loan-tile>
+  <mat-grid-tile
+    [colspan]="1"
+    [rowspan]="1"
+    *ngFor="let loan of loans; trackBy: trackLoansById">
+    <app-loan-tile
+      [loan]="loan">
+    </app-loan-tile>
+  </mat-grid-tile>
+
 </mat-grid-list>

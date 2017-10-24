@@ -4,8 +4,7 @@ import {LoanModel} from '../../model/loan.model';
 @Component({
   selector: 'app-loan-tile',
   templateUrl: './loan-tile.component.html',
-  styleUrls: ['./loan-tile.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./loan-tile.component.css']
 })
 export class LoanTileComponent {
 

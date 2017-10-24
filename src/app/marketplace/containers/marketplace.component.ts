@@ -62,14 +62,14 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
       );
   }
 
-  private success(data) {
+  private success = (data) =>{
     this.loans = data;
     this.setRating({index: 0});
-  }
+  };
 
-  private fail(err) {
+  private fail = (err) => {
     this.errorService.present(err, 'Marketplace subscriptions');
-  }
+  };
 
   private complete() {
 

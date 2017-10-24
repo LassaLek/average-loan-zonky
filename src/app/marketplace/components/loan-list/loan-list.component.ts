@@ -4,8 +4,7 @@ import {LoanModel} from '../../model/loan.model';
 @Component({
   selector: 'app-loan-list',
   templateUrl: './loan-list.component.html',
-  styleUrls: ['./loan-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./loan-list.component.css']
 })
 export class LoanListComponent {
   @Input() loans: Array<LoanModel> = [];
