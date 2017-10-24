@@ -9,7 +9,9 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 export class HeaderComponent {
 
   @Input() title: string = 'Zonky';
-  constructor() { }
+
+  constructor() {
+  }
 
 
 }

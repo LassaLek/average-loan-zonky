@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -10,20 +10,6 @@ import {LoanModel} from '../model/loan.model';
 
 @Injectable()
 export class MarketplaceService {
-
-  constructor(private http: Http,
-              private errorHandler: ErrorService) { }
-
-  getLoans(): Observable<Array<LoanModel>> {
-        return this.http
-          .get(Config.API_ENDPOINT + '/loans/marketplace')
-          .map((res: Response) => res.json())
-          .catch((err) => {
-            this.errorHandler.present(err, 'Loading data from server');
-            return this.getPreloadedLoans();
-          });
-  }
-
 
   static loansToAmounts(loans: Array<LoanModel>): Array<number> {
     return loans
@@ -53,11 +39,25 @@ export class MarketplaceService {
     return +(Math.round(unRounded * 100) / 100).toFixed(2);
   }
 
+  constructor(private http: Http,
+              private errorHandler: ErrorService) {
+  }
+
+  getLoans(): Observable<Array<LoanModel>> {
+    return this.http
+      .get(Config.API_ENDPOINT + '/loans/marketplace')
+      .map((res: Response) => res.json())
+      .catch((err) => {
+        this.errorHandler.present(err, 'Loading data from server');
+        return this.getPreloadedLoans();
+      });
+  }
+
   private getPreloadedLoans(): Observable<Array<LoanModel>> {
-    return this.http.get('assets/init/loans.json')
-      .map(res =>
-      {
-        return res.json()
+    return this.http
+      .get('assets/init/loans.json')
+      .map((res) => {
+        return res.json();
       });
   }
 }

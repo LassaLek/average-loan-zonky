@@ -62,22 +62,18 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
       );
   }
 
-  trackLoansById(index, item) {
-    return item.id;
-  }
-
-  private success = (data) => {
+  private success(data) {
     this.loans = data;
     this.setRating({index: 0});
-  };
+  }
 
-  private fail = (err) => {
-    this.errorService.present(err, 'Marketplace subscribtions');
-  };
+  private fail(err) {
+    this.errorService.present(err, 'Marketplace subscriptions');
+  }
 
-  private complete = () => {
+  private complete() {
 
-  };
+  }
 
   private setColNum$() {
     return Observable

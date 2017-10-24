@@ -1,22 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FooterComponent } from './footer.component';
-import {MatToolbarModule} from '@angular/material';
+import { LoanAverageComponent } from './loan-average.component';
 
-describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
+describe('LoanAverageComponent', () => {
+  let component: LoanAverageComponent;
+  let fixture: ComponentFixture<LoanAverageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatToolbarModule],
-      declarations: [ FooterComponent ]
+      declarations: [ LoanAverageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FooterComponent);
+    fixture = TestBed.createComponent(LoanAverageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

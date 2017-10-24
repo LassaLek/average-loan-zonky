@@ -1,0 +1,15 @@
+<div
+  *ngIf="loans.length === 0"
+  class="center-text">
+  Žádné půjčky
+</div>
+<mat-grid-list
+  [cols]="colNum"
+  rowHeight="200px"
+  #list
+  gutterSize="20px">
+  <app-loan-tile
+    *ngFor="let loan of loans; trackBy: trackLoansById"
+    [loan]="loan">
+  </app-loan-tile>
+</mat-grid-list>

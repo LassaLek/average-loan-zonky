@@ -5,4 +5,10 @@ describe('FilterPipe', () => {
     const pipe = new FilterPipe();
     expect(pipe).toBeTruthy();
   });
+
+  it('filtering empty array returns empty array', () => {
+    const pipe = new FilterPipe();
+    expect(pipe.transform([], '')).toEqual([]);
+  });
+
 });

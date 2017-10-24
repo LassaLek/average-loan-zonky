@@ -1,0 +1,17 @@
+<mat-grid-tile
+  [colspan]="1"
+  [rowspan]="1">
+  <mat-card
+    [style.height]="'150px'"
+    [style.width]="'150px'">
+    <mat-card-title>
+      {{loan.amount}} Kč
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{loan.rating}}
+    </mat-card-subtitle>
+    <mat-card-content>
+      {{loan.name}}
+    </mat-card-content>
+  </mat-card>
+</mat-grid-tile>
