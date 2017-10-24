@@ -23,7 +23,7 @@ Run `npm run all-tests` to start all test.
 You can also use `ng test|lint|e2e` to run tests separately.
 
 ##### WARNING
-Adding $PATH to browser may be needed. Can be done via: 
+Adding $PATH to browser may be needed to run `ng test`. Can be done via: 
 
 `export CHROME_BIN=<chromium-browser|google-chrome|...>`
 
