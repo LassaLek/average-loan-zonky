@@ -18,14 +18,14 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
   public filteredLoans: Array<LoanModel> = [];
   public ratingsArr: Array<string> = this.enumToArray(RatingsEnum);
   public averageOfFilteredLoans: number = 0;
+  public colNum: number = this.countColNumber();
+
   private loansSub: Subscription = null;
   private responsiveSub: Subscription = null;
-  public colNum: number = 1;
 
   constructor(private marketplaceService: MarketplaceService,
               private errorService: ErrorService,
               private filterPipe: FilterPipe) {
-
   }
 
   ngOnInit() {
@@ -37,9 +37,13 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
         this.complete
       );
     this.responsiveSub = this.setColNum$()
-      .subscribe((colNum) => {
-        this.colNum = colNum;
-      });
+      .subscribe(
+        (colNum) => {
+          this.colNum = colNum;
+        },
+        this.fail,
+        this.complete
+      );
   }
 
   ngOnDestroy() {
@@ -58,13 +62,17 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
       );
   }
 
+  trackLoansById(index, item) {
+    return item.id;
+  }
+
   private success = (data) => {
     this.loans = data;
     this.setRating({index: 0});
   };
 
   private fail = (err) => {
-    this.errorService.present(err, 'subscribe to loans service');
+    this.errorService.present(err, 'Marketplace subscribtions');
   };
 
   private complete = () => {
@@ -75,12 +83,14 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
     return Observable
       .fromEvent(window, 'resize')
       .debounceTime(100)
-      .map(() => {
-        if (window && window.innerWidth) {
-          return Math.floor(window.innerWidth / 250) || 1;
-        }
-        return 1;
-      });
+      .map(this.countColNumber);
+  }
+
+  private countColNumber(): number {
+    if (window && window.innerWidth) {
+      return Math.floor(window.innerWidth / 250) || 1;
+    }
+    return 1;
   }
 
   private enumToArray(enumObj: any) {
