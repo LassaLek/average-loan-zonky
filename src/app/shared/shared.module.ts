@@ -10,6 +10,9 @@ import {FilterPipe} from './pipes/filter/filter.pipe';
   declarations: [
     FilterPipe
   ],
+  providers: [
+    FilterPipe
+  ],
   exports: [
     CommonModule,
     FormsModule,

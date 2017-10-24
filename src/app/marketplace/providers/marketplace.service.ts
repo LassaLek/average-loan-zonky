@@ -24,6 +24,31 @@ export class MarketplaceService {
           });
   }
 
+
+  static loansToAmounts(loans: Array<LoanModel>): Array<number> {
+    return loans
+      .map((loan) => {
+        return loan.amount;
+      });
+  }
+
+  static sumArray(arr: Array<number>): number {
+    if (Array.isArray(arr) && (arr.length !== 0)) {
+      return arr.reduce((sum, curr) => {
+        return sum + curr;
+      });
+    }
+    return 0;
+  }
+
+  static countAverage(sum: number, count: number): number {
+    if (typeof sum === 'number' && typeof count === 'number' && sum >= 0 && count > 0) {
+      return sum / count;
+    }
+
+    return 0;
+  }
+
   private getPreloadedLoans(): Observable<Array<LoanModel>> {
     return this.http.get('assets/init/loans.json')
       .map(res =>

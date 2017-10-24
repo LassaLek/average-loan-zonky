@@ -1,8 +1,9 @@
 <mat-tab-group (selectChange)="setRating($event)">
   <mat-tab *ngFor="let rating of ratingsArr" label="{{rating}}">
     <h1>LOANS:</h1>
+    <h2>{{averageOfFilteredLoans}}</h2>
     <ul #list>
-      <li *ngFor="let loan of loans | filter:rating">
+      <li *ngFor="let loan of filteredLoans">
       {{loan.amount}}
       </li>
     </ul>

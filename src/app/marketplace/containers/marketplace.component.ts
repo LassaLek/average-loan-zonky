@@ -4,6 +4,7 @@ import {LoanModel} from '../model/loan.model';
 import {RatingsEnum} from '../model/ratings.enum';
 import {ErrorService} from '../../core/services/error.service';
 import {Subscription} from 'rxjs/Subscription';
+import {FilterPipe} from '../../shared/pipes/filter/filter.pipe';
 
 @Component({
   selector: 'app-marketplace',
@@ -11,27 +12,24 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./marketplace.component.css']
 })
 export class MarketplaceComponent implements OnInit, OnDestroy {
-  public loans: Array<LoanModel>;
-  public rating: string;
-  public ratingsArr: Array<string>;
-  private loansSub: Subscription;
+  public loans: Array<LoanModel> = [];
+  public filteredLoans: Array<LoanModel> = [];
+  public ratingsArr: Array<string> = this.enumToArray(RatingsEnum);
+  public averageOfFilteredLoans: number = 0;
+  private loansSub: Subscription = null;
 
   constructor(private marketplaceService: MarketplaceService,
-              private errorService: ErrorService) {
-    this.loans = [];
-    this.rating = 'AAAAA';
-    this.ratingsArr = Object
-      .keys(RatingsEnum)
-      .map((rating) => {
-        return rating;
-      });
+              private errorService: ErrorService,
+              private filterPipe: FilterPipe) {
   }
 
   ngOnInit() {
-    this.loansSub = this.marketplaceService.getLoans()
+    this.loansSub = this.marketplaceService
+      .getLoans()
       .subscribe(
         this.success,
-        this.fail
+        this.fail,
+        this.complete
       );
   }
 
@@ -40,15 +38,39 @@ export class MarketplaceComponent implements OnInit, OnDestroy {
   }
 
   setRating(rating) {
-    this.rating = this.ratingsArr[rating.index];
+    this.filteredLoans = this.filterPipe.transform(this.loans, this.ratingsArr[rating.index]);
+    this.averageOfFilteredLoans = MarketplaceService
+      .countAverage(
+        MarketplaceService.sumArray(
+          MarketplaceService.loansToAmounts(this.filteredLoans)
+        ),
+        this.filteredLoans.length
+      );
   }
 
-  success = (data) => {
-    console.log(data);
+  private success = (data) => {
     this.loans = data;
+    this.setRating({index: 0});
+    this.averageOfFilteredLoans = MarketplaceService.countAverage(0,0);
   };
 
-  fail = (err) => {
+  private fail = (err) => {
     this.errorService.present(err, 'subscribe to loans service');
+  };
+
+  private complete = () => {
+
+  };
+
+  private enumToArray(enumObj: RatingsEnum) {
+    if (!enumObj) {
+      return [];
+    }
+
+    return Object
+      .keys(enumObj)
+      .map((rating) => {
+        return rating;
+      });
   }
 }
